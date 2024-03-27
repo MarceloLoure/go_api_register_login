@@ -2,7 +2,7 @@ package database
 
 import (
 	"database/sql"
-	"internal/entity"
+	"github.com/MarceloLoure/go_api_register_login/internal/entity"
 )
 
 type UserDB struct {

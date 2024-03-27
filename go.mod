@@ -1,4 +1,4 @@
-module github.com/MarceloLoure/apigo
+module github.com/MarceloLoure/go_api_register_login
 
 go 1.21.6
 

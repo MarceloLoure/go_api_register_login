@@ -1,8 +1,8 @@
 package service
 
 import (
-	"internal/database"
-	"internal/entity"
+	"github.com/MarceloLoure/go_api_register_login/internal/database"
+	"github.com/MarceloLoure/go_api_register_login/internal/entity"
 )
 
 type UserService struct {

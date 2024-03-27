@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"internal/database"
-	"internal/entity"
-	"internal/service"
+	"github.com/MarceloLoure/go_api_register_login/internal/database"
+	"github.com/MarceloLoure/go_api_register_login/internal/entity"
+	"github.com/MarceloLoure/go_api_register_login/internal/service"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	_ "github.com/go-sql-driver/mysql"
