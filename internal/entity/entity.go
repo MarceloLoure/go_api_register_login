@@ -5,22 +5,17 @@ import (
 )
 
 type User struct {
-	ID    uuid.UUID `json:"id"`
-	Name  string    `json:"name"`
-	Email string    `json:"email"`
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
-func NewUser(name, email, password string) (*User, error) {
-	id, err := uuid.NewRandom()
-	if err != nil {
-		return nil, err
-	}
-
+func NewUser(name, email, password string) *User {
 	return &User{
-		ID:    id,
-		Name:  name,
-		Email: email,
+		ID:       uuid.New().String(),
+		Name:     name,
+		Email:    email,
 		Password: password,
-	}, nil
+	}
 }

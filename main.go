@@ -42,5 +42,6 @@ func main() {
 	r.Post("/users", webUserHandler.CreateUser)
 	r.Get("/users", GetAPI2)
 
+	fmt.Println("Servidor rodando na porta 3000")
 	http.ListenAndServe(":3000", r)
 }

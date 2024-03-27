@@ -2,10 +2,11 @@ package webserver
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
-	"github.com/MarceloLoure/go_api_register_login/internal/service"
 	"github.com/MarceloLoure/go_api_register_login/internal/entity"
+	"github.com/MarceloLoure/go_api_register_login/internal/service"
 )
 
 type WebUserHandler struct {
@@ -18,8 +19,10 @@ func NewWebUserHandler(userService *service.UserService) *WebUserHandler {
 
 func (w *WebUserHandler) CreateUser(writer http.ResponseWriter, r *http.Request) {
 	var user entity.User
+	log.Println(r.Body)
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
+		log.Println(err)
 		http.Error(writer, err.Error(), http.StatusBadRequest)
 		return
 	}

@@ -14,15 +14,12 @@ func NewUserService(userDB *database.UserDB) *UserService {
 }
 
 func (u *UserService) CreateUser(name, email, password string) (*entity.User, error) {
-	user, err := entity.NewUser(name, email, password)
+	user := entity.NewUser(name, email, password)
+
+	createdUser, err := u.UserDB.CreateUser(user)
 	if err != nil {
 		return nil, err
 	}
 
-	user, err = u.UserDB.CreateUser(user)
-	if err != nil {
-		return nil, err
-	}
-
-	return user, nil
+	return createdUser, nil
 }
