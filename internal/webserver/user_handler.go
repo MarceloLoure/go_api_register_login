@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"internal/service"
-	"internal/entity"
+	"github.com/MarceloLoure/go_api_register_login/internal/service"
+	"github.com/MarceloLoure/go_api_register_login/internal/entity"
 	"github.com/go-chi/chi/v5"
 )
 
