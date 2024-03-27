@@ -1,8 +1,8 @@
 package services
 
 import (
-	"database/user_db"
-	"entity"
+	"github.com/MarceloLoure/apigo/internal/database"
+	"github.com/MarceloLoure/apigo/internal/entity"
 )
 
 type UserService struct {

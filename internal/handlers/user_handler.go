@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"encoding/json"
-	"entity"
+	"github.com/MarceloLoure/apigo/internal/entity"
 	"net/http"
-	"services"
+	"github.com/MarceloLoure/apigo/internal/services"
 
 	"github.com/go-chi/chi/v5"
 )

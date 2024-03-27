@@ -3,7 +3,7 @@ package database
 import (
 	"database/sql"
 
-	"entity"
+	"github.com/MarceloLoure/apigo/internal/entity"
 )
 
 type UserDB struct {

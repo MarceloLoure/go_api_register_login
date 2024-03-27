@@ -1,4 +1,4 @@
-module apigo
+module github.com/MarceloLoure/apigo
 
 go 1.21.6
 

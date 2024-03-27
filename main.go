@@ -1,10 +1,10 @@
 package main
 
 import (
-	"apigo/internal/database"
-	"apigo/internal/entity"
-	"apigo/internal/handlers"
-	"apigo/internal/services"
+	"github.com/MarceloLoure/apigo/internal/database"
+	"github.com/MarceloLoure/apigo/internal/entity"
+	"github.com/MarceloLoure/apigo/internal/handlers"
+	"github.com/MarceloLoure/apigo/internal/services"
 	"database/sql"
 	"fmt"
 	"log"
