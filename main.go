@@ -19,6 +19,11 @@ func GetAPI(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"message": "Hello, World!"}`))
 }
 
+func GetAPI2(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(`{"message": "Olá usuário!"}`))
+}
+
 func main() {
 	db, err := sql.Open("mysql", "root:root@tcp(mysql:3306)/baseUsers")
 	if err != nil {
@@ -35,6 +40,7 @@ func main() {
 	r := chi.NewRouter()
 	r.Get("/", GetAPI)
 	r.Post("/users", webUserHandler.CreateUser)
+	r.Get("/users", GetAPI2)
 
 	http.ListenAndServe(":3000", r)
 }

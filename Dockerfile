@@ -1,5 +1,5 @@
 # Use a imagem oficial do Golang como base
-FROM golang:1.22.1-alpine3.19 as builder
+FROM golang:1.21-alpine3.19 as builder
 
 # Define o diretório de trabalho dentro do contêiner
 WORKDIR /go/src/app
@@ -17,7 +17,7 @@ COPY . .
 RUN go build -o /go/bin/app
 
 # Segundo estágio para uma imagem mínima
-FROM alpine:3.19.1
+FROM scratch
 
 # Copia o binário gerado no estágio anterior para o contêiner final
 COPY --from=builder /go/bin/app /usr/local/bin/app
