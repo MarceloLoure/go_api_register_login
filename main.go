@@ -40,7 +40,7 @@ func main() {
 	r := chi.NewRouter()
 	r.Get("/", GetAPI)
 	r.Post("/users", webUserHandler.CreateUser)
-	r.Get("/users", GetAPI2)
+	r.Get("/users/{email}", webUserHandler.GetUserByEmail)
 
 	fmt.Println("Servidor rodando na porta 3000")
 	http.ListenAndServe(":3000", r)

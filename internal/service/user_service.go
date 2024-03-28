@@ -23,3 +23,12 @@ func (u *UserService) CreateUser(name, email, password string) (*entity.User, er
 
 	return createdUser, nil
 }
+
+func (u *UserService) GetUserByEmail(email string) (*entity.User, error) {
+	user, err := u.UserDB.GetUserByEmail(email)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}

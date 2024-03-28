@@ -11,9 +11,17 @@ type User struct {
 	Password string `json:"password"`
 }
 
+func generateCustomUUID() string {
+	uuidWithHyphens := uuid.New().String()
+
+	customUUID := uuidWithHyphens[:32]
+
+	return customUUID
+}
+
 func NewUser(name, email, password string) *User {
 	return &User{
-		ID:       uuid.New().String(),
+		ID:       generateCustomUUID(),
 		Name:     name,
 		Email:    email,
 		Password: password,
