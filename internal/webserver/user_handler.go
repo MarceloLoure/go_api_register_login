@@ -20,7 +20,7 @@ func NewWebUserHandler(userService *service.UserService) *WebUserHandler {
 
 func (w *WebUserHandler) CreateUser(writer http.ResponseWriter, r *http.Request) {
 	var user entity.User
-	log.Println(r.Body)
+
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
 		log.Println(err)
@@ -28,7 +28,19 @@ func (w *WebUserHandler) CreateUser(writer http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	createdUser, err := w.UserService.CreateUser(user.Name, user.Email, user.Password)
+	existingUser, err := w.UserService.GetUserByEmail(user.Email)
+	if existingUser != nil {
+		http.Error(writer, "E-mail já cadastrado", http.StatusBadRequest)
+		return
+	}
+
+	hashedPassword, err := w.UserService.HashPassword(user.Password)
+	if err != nil {
+		http.Error(writer, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	createdUser, err := w.UserService.CreateUser(user.Name, user.Email, hashedPassword)
 	if err != nil {
 		http.Error(writer, err.Error(), http.StatusInternalServerError)
 		return
@@ -54,4 +66,26 @@ func (w *WebUserHandler) GetUserByEmail(writer http.ResponseWriter, r *http.Requ
 
 	writer.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(writer).Encode(user)
+}
+
+func (w *WebUserHandler) Login(writer http.ResponseWriter, r *http.Request) {
+	writer.Header().Set("Content-Type", "application/json")
+
+	var user entity.UserLogin
+
+	err := json.NewDecoder(r.Body).Decode(&user)
+
+	if err != nil {
+		http.Error(writer, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	token, err := w.UserService.LoginUser(user.Email, user.Password)
+
+	if err != nil {
+		http.Error(writer, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	json.NewEncoder(writer).Encode(map[string]string{"token": token})
 }

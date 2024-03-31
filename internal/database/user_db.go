@@ -23,7 +23,19 @@ func (u *UserDB) CreateUser(user *entity.User) (*entity.User, error) {
 	return user, nil
 }
 
-func (u *UserDB) GetUserByEmail(email string) (*entity.User, error) {
+func (u *UserDB) GetUserByEmail(email string) (*entity.UserResponse, error) {
+	var user entity.UserResponse
+
+	row := u.db.QueryRow("SELECT id, name, email FROM users WHERE email = ?", email)
+	err := row.Scan(&user.ID, &user.Name, &user.Email)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+func (u *UserDB) GetUserByLogin(email string) (*entity.User, error) {
 	var user entity.User
 
 	row := u.db.QueryRow("SELECT id, name, email, password FROM users WHERE email = ?", email)
